@@ -1,0 +1,21 @@
+{
+    "name": "App Name",
+    "version": "1.0.0",
+    "build": 1,
+    "id": "com.example.appname",
+    "fullscreen": true, 
+    "orientation": "portrait",
+    "plugins": [],
+    "credentials":
+    {
+        "android":
+        {
+            "release":
+            {
+                "name": "NAME",
+                "secret": "SECRET"
+            }
+        }
+    },
+    "allowMixedContent": false
+}
