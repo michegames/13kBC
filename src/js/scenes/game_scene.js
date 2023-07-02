@@ -22,15 +22,17 @@ class GameScene extends Scene
     {
         super('scn_game');
         this.start_point_y = 36;
-        this.is_clicking = false;
-        this.state = STATE.PLAY;
-        this.fruit_position = POSITION.TOP;
-        this.score = 0;
     }
 
     create()
     {
-        this.create_bg();
+        // here not in constructor
+        this.is_clicking = false;
+        this.state = STATE.PLAY;
+        this.fruit_position = POSITION.TOP;
+        this.score = 0;
+
+        const cur_bg = this.create_bg();
         this.create_pg();
         this.enemies = this.physics.add.group();
         this.time.addEvent(
@@ -40,6 +42,15 @@ class GameScene extends Scene
             loop: true
         });
         this.create_fruit();
+        this.lbl_score = this.add.bitmapText(10, 10, 'PublicPixel', 'Score: 0', 15);
+
+        console.log("cur bs is => "+ cur_bg)
+        window.$L = this.lbl_score;
+        if(cur_bg === 'bg3.png')
+        {
+            
+            this.lbl_score.setTint(0x000000);
+        }
     }
 
     update(time, delta)
@@ -62,9 +73,9 @@ class GameScene extends Scene
             {
                 this.fruit.destroy();
                 this.score += 1;
-                console.log("score => " + this.score);
                 this.fruit_position = (this.fruit_position === POSITION.TOP) ? POSITION.BOTTOM : POSITION.TOP;
                 this.create_fruit();
+                this.lbl_score.text = `Score ${this.score}`;
             }
             this.clean();
         }
@@ -75,7 +86,10 @@ class GameScene extends Scene
         const { width, height } = this.sys.game.canvas;
         const bgs = ['bg.png', 'bg2.png', 'bg3.png'];
         const rnd = Phaser.Math.Between(0, bgs.length - 1);
-        const image = this.add.tileSprite(width / 2, height / 2, 440, 640, '13kbc', bgs[rnd]);
+        const cur_bg = bgs[rnd];
+
+        const image = this.add.tileSprite(width / 2, height / 2, 440, 640, '13kbc', cur_bg);
+
         const top_plat = this.add.sprite(width / 2, this.start_point_y, '13kbc', 'base.png');
         top_plat.scale = 3;
 
@@ -90,6 +104,7 @@ class GameScene extends Scene
         this.bottom_plat.setSize(100, 16);
         this.bottom_plat.setVisible(false);
 
+        return cur_bg;
     }
 
     create_pg()
@@ -129,16 +144,15 @@ class GameScene extends Scene
         const y = (this.fruit_position === POSITION.TOP) ? this.start_point_y : height - this.start_point_y;
 
         this.fruit = this.physics.add.sprite(width / 2, y, '13kbc', fruit_texture);
-        this.fruit.scale = 3;
-
-        /*this.physics.add.collider(this.player, fruit, () =>
+        
+        if( (fruit_texture === 'Nut.png') || (fruit_texture === 'Nut2.png') )
         {
-            fruit.destroy();
-            this.score += 1;
-            console.log("score => " + this.score);
-            this.fruit_position = (this.fruit_position === POSITION.TOP) ? POSITION.BOTTOM : POSITION.TOP;
-            this.create_fruit();
-        }, null, this);*/
+            this.fruit.scale = 2;
+        }
+        else
+        {
+            this.fruit.scale = 3;
+        }
     }
 
     add_enemy()
@@ -207,8 +221,8 @@ class GameScene extends Scene
 
     ending()
     {
+        this.state = STATE.GAMEOVER;
         this.time.removeAllEvents();
-        this.state === STATE.GAMEOVER;
         this.player.setVelocityY(0);
         this.player.anims.stop();
         this.enemies_clean_all();
@@ -230,6 +244,7 @@ class GameScene extends Scene
 
     plat_collision_reverse()
     {
+        if(this.state === STATE.GAMEOVER) return -1;
         if(this.player.body.velocity.y > 0)
         {
             this.player.y += 20;
@@ -247,6 +262,7 @@ class GameScene extends Scene
 
     reverse()
     {
+        if(this.state === STATE.GAMEOVER) return -1;
         this.player.setVelocityY(-this.player.body.velocity.y);
         this.player.anims.play((this.player.body.velocity.y > 0) ?
             this.cur_animation_walk_down :
