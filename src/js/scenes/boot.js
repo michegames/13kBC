@@ -13,8 +13,8 @@ class BootScene extends Scene
         this.loadLabel = this.add.text(width/2, height/2, 'loading\n0%', { font: '30px Arial', fill: '#fff', align: 'center' });
         this.loadLabel.setOrigin(0.5, 0.5);
 
-        this.load.atlas('13kbc', '/obj/13kbc.png', '/obj/13kbc.json');
-        this.load.bitmapFont('PublicPixel', '/obj/publicpixel.png', '/obj/publicpixel.xml');
+        this.load.atlas('13kbc', 'obj/13kbc.png', 'obj/13kbc.json');
+        this.load.bitmapFont('PublicPixel', 'obj/publicpixel.png', 'obj/publicpixel.xml');
 
         this.load.on('progress', this.progress, this);
     }

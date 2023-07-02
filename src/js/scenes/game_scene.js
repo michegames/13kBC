@@ -1,5 +1,13 @@
 import { Scene } from 'phaser';
 
+const STATE =
+{
+    PLAY: Symbol("red"),
+    PAUSE: Symbol("blue"),
+    GAMEOVER: Symbol("green")
+};
+Object.freeze(STATE);
+
 class GameScene extends Scene
 {
 
@@ -8,6 +16,7 @@ class GameScene extends Scene
         super('scn_game');
         this.start_point_y = 36;
         this.isClicking = false;
+        this.state = STATE.PLAY;
     }
 
     create()
@@ -15,32 +24,33 @@ class GameScene extends Scene
         this.create_bg();
         this.create_pg();
         this.enemies = this.physics.add.group();
-        window.$E = this.enemies;
         this.time.addEvent(
         {
             delay: 1500,
             callback: () => this.add_enemy(),
             loop: true
         });
+        window.$T = this.time;
     }
 
     update(time, delta)
     {
-        if (!this.input.activePointer.isDown && this.isClicking == true)
+        if(this.state === STATE.PLAY)
         {
-            console.log('tap');
-            //this.player.setVelocityY(-this.player.body.velocity.y);
-            this.reverse();
-            this.isClicking = false;
-        } else if (this.input.activePointer.isDown && this.isClicking == false)
-        {
-            this.isClicking = true;
+            if (!this.input.activePointer.isDown && this.isClicking == true)
+            {
+                this.reverse();
+                this.isClicking = false;
+            } else if (this.input.activePointer.isDown && this.isClicking == false)
+            {
+                this.isClicking = true;
+            }
+            if(this.physics.overlap(this.player, this.enemies))
+            {
+                this.ending();
+            }
         }
         this.clean();
-        if(this.physics.overlap(this.player, this.enemies))
-        {
-            this.ending();
-        }
     }
 
     /* custom fns */
@@ -88,6 +98,7 @@ class GameScene extends Scene
         this.player = this.physics.add.sprite(width / 2, height - 70, 'player', 1);
         this.player.scale = 3;
         this.player.setVelocityY(-200);
+        this.player.body.setSize(10,10);
 
         this.physics.add.overlap(this.player, this.top_plat, this.reverse, null, this);
         this.physics.add.overlap(this.player, this.bottom_plat, this.reverse, null, this);
@@ -95,6 +106,7 @@ class GameScene extends Scene
         //this.physics.add.overlap(this.player, this.enemies, this.ending, null, this);
 
         this.player.anims.play('walk_u', true);
+        window.$P = this.player;
     }
 
     add_enemy()
@@ -141,7 +153,26 @@ class GameScene extends Scene
 
     ending()
     {
-        this.scene.start('scn_menu');
+        this.time.removeAllEvents();
+        this.state === STATE.GAMEOVER;
+        this.player.setVelocityY(0);
+        this.player.anims.stop();
+
+        this.tweens.add(
+            {
+                targets: this.player,
+                scale: 5,
+                duration: 1000,
+                yoyo: true,
+                completeDelay: 500,
+                angle: 360,
+                onComplete: () =>
+                {
+                    this.scene.start('scn_menu');
+                }
+            }
+        );
+        //this.scene.start('scn_menu');
     }
 
     reverse()
