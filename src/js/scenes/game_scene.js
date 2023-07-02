@@ -2,9 +2,16 @@ import { Scene } from 'phaser';
 
 const STATE =
 {
-    PLAY: Symbol("red"),
-    PAUSE: Symbol("blue"),
-    GAMEOVER: Symbol("green")
+    PLAY: Symbol('PLAY'),
+    PAUSE: Symbol('PAUSE'),
+    GAMEOVER: Symbol('GAMEOVER')
+};
+Object.freeze(STATE);
+
+const POSITION =
+{
+    TOP: Symbol('TOP'),
+    BOTTOM: Symbol('BOTTOM')
 };
 Object.freeze(STATE);
 
@@ -15,8 +22,10 @@ class GameScene extends Scene
     {
         super('scn_game');
         this.start_point_y = 36;
-        this.isClicking = false;
+        this.is_clicking = false;
         this.state = STATE.PLAY;
+        this.fruit_position = POSITION.TOP;
+        this.score = 0;
     }
 
     create()
@@ -30,23 +39,32 @@ class GameScene extends Scene
             callback: () => this.add_enemy(),
             loop: true
         });
+        this.create_fruit();
     }
 
     update(time, delta)
     {
         if(this.state === STATE.PLAY)
         {
-            if (!this.input.activePointer.isDown && this.isClicking == true)
+            if (!this.input.activePointer.isDown && this.is_clicking == true)
             {
                 this.reverse(false);
-                this.isClicking = false;
-            } else if (this.input.activePointer.isDown && this.isClicking == false)
+                this.is_clicking = false;
+            } else if (this.input.activePointer.isDown && this.is_clicking == false)
             {
-                this.isClicking = true;
+                this.is_clicking = true;
             }
             if(this.physics.overlap(this.player, this.enemies))
             {
                 this.ending();
+            }
+            if(this.physics.overlap(this.player, this.fruit))
+            {
+                this.fruit.destroy();
+                this.score += 1;
+                console.log("score => " + this.score);
+                this.fruit_position = (this.fruit_position === POSITION.TOP) ? POSITION.BOTTOM : POSITION.TOP;
+                this.create_fruit();
             }
             this.clean();
         }
@@ -94,6 +112,33 @@ class GameScene extends Scene
         this.physics.add.collider(this.player, this.bottom_plat, this.plat_collision_reverse, null, this);
 
         this.player.anims.play(this.cur_animation_walk_up, true);
+    }
+
+    create_fruit()
+    {
+        const { width, height } = this.sys.game.canvas;
+        // all frutis referene not sure if i use all now
+        const all_fruits = ['Beaf', 'Fish', 'FortuneCookie', 'Onigiri', 'Shrimp', 'Sushi', 'Sushi2',
+            'Yakitori', 'Octopus', 'TeaLeaf', 'Noodle', 'Calamari', 'Honey', 'SeedLargeWhite','Seed1',
+            'Seed2', 'SeedBig1', 'SeedBig2', 'SeedBig3', 'SeedLarge', 'Seed3', 'Nut', 'Nut2'
+        ];
+        const fruits = ['Seed2', 'SeedBig2', 'SeedBig3', 'Seed3', 'Nut', 'Nut2', 'Yakitori'];
+
+        const fruit_texture = `${fruits[Phaser.Math.Between(0, fruits.length-1)]}.png`;
+
+        const y = (this.fruit_position === POSITION.TOP) ? this.start_point_y : height - this.start_point_y;
+
+        this.fruit = this.physics.add.sprite(width / 2, y, '13kbc', fruit_texture);
+        this.fruit.scale = 3;
+
+        /*this.physics.add.collider(this.player, fruit, () =>
+        {
+            fruit.destroy();
+            this.score += 1;
+            console.log("score => " + this.score);
+            this.fruit_position = (this.fruit_position === POSITION.TOP) ? POSITION.BOTTOM : POSITION.TOP;
+            this.create_fruit();
+        }, null, this);*/
     }
 
     add_enemy()
@@ -208,6 +253,7 @@ class GameScene extends Scene
             this.cur_animation_walk_up,
         true);
     }
+
 };
 
 export default GameScene;
