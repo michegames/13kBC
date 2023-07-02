@@ -4,6 +4,7 @@ const _width = 640 / (window.innerHeight/window.innerWidth);
 
 const config =
 {
+    type: Phaser.AUTO,
     width: _width,
     height: 640,
     physics:

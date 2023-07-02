@@ -36,24 +36,18 @@ class GameScene extends Scene
         this.create_pg();
         this.enemies = this.physics.add.group();
         this.time.addEvent(
-        {
-            delay: 1500,
-            callback: () => this.add_enemy(),
-            loop: true
-        });
+            {
+                delay: 1500,
+                callback: () => this.add_enemy(),
+                loop: true
+            });
         this.create_fruit();
-        this.lbl_score = this.add.bitmapText(10, 10, 'PublicPixel', 'Score: 0', 15);
-
-        if(cur_bg === 'bg3.png')
-        {
-            
-            this.lbl_score.setTint(0x000000);
-        }
+        this.lbl_score = this.add.bitmapText(10, 10, 'PublicPixel', '0', 15);
     }
 
     update(time, delta)
     {
-        if(this.state === STATE.PLAY)
+        if (this.state === STATE.PLAY)
         {
             if (!this.input.activePointer.isDown && this.is_clicking == true)
             {
@@ -63,17 +57,17 @@ class GameScene extends Scene
             {
                 this.is_clicking = true;
             }
-            if(this.physics.overlap(this.player, this.enemies))
+            if (this.physics.overlap(this.player, this.enemies))
             {
                 this.ending();
             }
-            if(this.physics.overlap(this.player, this.fruit))
+            if (this.physics.overlap(this.player, this.fruit))
             {
                 this.fruit.destroy();
-                this.score += 1;
+                this.score += 5;
                 this.fruit_position = (this.fruit_position === POSITION.TOP) ? POSITION.BOTTOM : POSITION.TOP;
                 this.create_fruit();
-                this.lbl_score.text = `Score ${this.score}`;
+                this.lbl_score.text = `${this.score}`;
             }
             this.clean();
         }
@@ -98,7 +92,7 @@ class GameScene extends Scene
         this.top_plat.setSize(100, 16);
         this.top_plat.setVisible(false);
 
-        this.bottom_plat = this.physics.add.staticSprite(width / 2, height-8, null);
+        this.bottom_plat = this.physics.add.staticSprite(width / 2, height - 8, null);
         this.bottom_plat.setSize(100, 16);
         this.bottom_plat.setVisible(false);
 
@@ -109,7 +103,7 @@ class GameScene extends Scene
     {
         const { width, height } = this.sys.game.canvas;
         const players = ['cavegirl', 'cavegirl2', 'caveman', 'caveman2'];
-        
+
         this.cur_player = players[Phaser.Math.Between(0, players.length - 1)];
         this.cur_animation_walk_up = `${this.cur_player}_walk_u`;
         this.cur_animation_walk_down = `${this.cur_player}_walk_d`;
@@ -118,7 +112,7 @@ class GameScene extends Scene
 
         this.player.scale = 3;
         this.player.setVelocityY(-200);
-        this.player.body.setSize(10,10);
+        this.player.body.setSize(10, 10);
         this.player.body.setBounceY(1);
 
         this.physics.add.collider(this.player, this.top_plat, this.plat_collision_reverse, null, this);
@@ -132,18 +126,18 @@ class GameScene extends Scene
         const { width, height } = this.sys.game.canvas;
         // all frutis referene not sure if i use all now
         const all_fruits = ['Beaf', 'Fish', 'FortuneCookie', 'Onigiri', 'Shrimp', 'Sushi', 'Sushi2',
-            'Yakitori', 'Octopus', 'TeaLeaf', 'Noodle', 'Calamari', 'Honey', 'SeedLargeWhite','Seed1',
+            'Yakitori', 'Octopus', 'TeaLeaf', 'Noodle', 'Calamari', 'Honey', 'SeedLargeWhite', 'Seed1',
             'Seed2', 'SeedBig1', 'SeedBig2', 'SeedBig3', 'SeedLarge', 'Seed3', 'Nut', 'Nut2'
         ];
         const fruits = ['Seed2', 'SeedBig2', 'SeedBig3', 'Seed3', 'Nut', 'Nut2', 'Yakitori'];
 
-        const fruit_texture = `${fruits[Phaser.Math.Between(0, fruits.length-1)]}.png`;
+        const fruit_texture = `${fruits[Phaser.Math.Between(0, fruits.length - 1)]}.png`;
 
         const y = (this.fruit_position === POSITION.TOP) ? this.start_point_y : height - this.start_point_y;
 
         this.fruit = this.physics.add.sprite(width / 2, y, '13kbc', fruit_texture);
-        
-        if( (fruit_texture === 'Nut.png') || (fruit_texture === 'Nut2.png') )
+
+        if ((fruit_texture === 'Nut.png') || (fruit_texture === 'Nut2.png'))
         {
             this.fruit.scale = 2;
         }
@@ -159,7 +153,7 @@ class GameScene extends Scene
         const center_x = width / 2;
 
         const enemies = ['pig1', 'pig2', 'pig3', 'horse', 'cow']
-        const enemy_texture = enemies[Phaser.Math.Between(0, enemies.length-1)];
+        const enemy_texture = enemies[Phaser.Math.Between(0, enemies.length - 1)];
         const enemy_anim = `${enemy_texture}_walk`;
         const y = Phaser.Math.Between(10, 55) * 10;
 
@@ -170,13 +164,13 @@ class GameScene extends Scene
 
         let enemy = null;
 
-        const is_widhter = (width>=440)
+        const is_widhter = (width >= 440)
 
-        if(from_left)
+        if (from_left)
         {
-            if(is_widhter)
+            if (is_widhter)
             {
-                enemy = this.enemies.create(center_x-230, y, enemy_texture);
+                enemy = this.enemies.create(center_x - 230, y, enemy_texture);
             }
             else
             {
@@ -187,15 +181,15 @@ class GameScene extends Scene
             enemy.anims.play(enemy_anim);
             enemy.body.velocity.x = vel;
         }
-        if(from_right)
+        if (from_right)
         {
-            if(is_widhter)
+            if (is_widhter)
             {
-                enemy = this.enemies.create(center_x+230, y, enemy_texture);
+                enemy = this.enemies.create(center_x + 230, y, enemy_texture);
             }
             else
             {
-                enemy = this.enemies.create(width+10, y, enemy_texture);
+                enemy = this.enemies.create(width + 10, y, enemy_texture);
             }
             enemy.scale = 3;
             enemy.anims.play(enemy_anim);
@@ -209,9 +203,9 @@ class GameScene extends Scene
         const center_x = width / 2;
 
         const arr = this.enemies.getChildren();
-        for(let x=arr.length-1; x>=0; x--)
+        for (let x = arr.length - 1; x >= 0; x--)
         {
-            if((arr[x].x > center_x + 250) || (arr[x].x < center_x - 250))
+            if ((arr[x].x > center_x + 250) || (arr[x].x < center_x - 250))
             {
                 arr[x].destroy();
             }
@@ -221,7 +215,7 @@ class GameScene extends Scene
     enemies_clean_all()
     {
         const arr = this.enemies.getChildren();
-        for(let x=arr.length-1; x>=0; x--)
+        for (let x = arr.length - 1; x >= 0; x--)
         {
             try
             {
@@ -236,6 +230,20 @@ class GameScene extends Scene
 
     ending()
     {
+        function take_best(array)
+        {
+            // Ordina l'array in ordine decrescente
+            let arrayOrdinato = array.sort(function (a, b)
+            {
+                return b.val - a.val;
+            });
+
+            // Prendi i primi 10 valori dall'array ordinato
+            let massimi10 = arrayOrdinato.slice(0, 10);
+            return massimi10;
+        }
+
+
         this.state = STATE.GAMEOVER;
         this.time.removeAllEvents();
         this.player.setVelocityY(0);
@@ -251,6 +259,28 @@ class GameScene extends Scene
                 angle: 360,
                 onComplete: () =>
                 {
+                    const _time = new Date();
+                    const _time_string = `${_time.toLocaleDateString()}\n${_time.toLocaleTimeString()}`;
+                    let score_table = localStorage.getItem('scores');
+                    if (score_table === null)
+                    {
+                        score_table = [
+                        {
+                            val: this.score,
+                            when: _time_string
+                        }];
+                    }
+                    else
+                    {
+                        score_table = JSON.parse(score_table);
+                        score_table.push(
+                        {
+                            val: this.score,
+                            when: _time_string
+                        });
+                        score_table = take_best(score_table);
+                    }
+                    localStorage.setItem('scores', JSON.stringify(score_table));
                     this.scene.start('scn_menu');
                 }
             }
@@ -259,8 +289,8 @@ class GameScene extends Scene
 
     plat_collision_reverse()
     {
-        if(this.state === STATE.GAMEOVER) return -1;
-        if(this.player.body.velocity.y > 0)
+        if (this.state === STATE.GAMEOVER) return -1;
+        if (this.player.body.velocity.y > 0)
         {
             this.player.y += 20;
             this.player.setVelocityY(200);
@@ -277,12 +307,12 @@ class GameScene extends Scene
 
     reverse()
     {
-        if(this.state === STATE.GAMEOVER) return -1;
+        if (this.state === STATE.GAMEOVER) return -1;
         this.player.setVelocityY(-this.player.body.velocity.y);
         this.player.anims.play((this.player.body.velocity.y > 0) ?
             this.cur_animation_walk_down :
             this.cur_animation_walk_up,
-        true);
+            true);
     }
 
 };
