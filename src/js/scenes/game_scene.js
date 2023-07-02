@@ -4,7 +4,8 @@ const STATE =
 {
     PLAY: Symbol('PLAY'),
     PAUSE: Symbol('PAUSE'),
-    GAMEOVER: Symbol('GAMEOVER')
+    GAMEOVER: Symbol('GAMEOVER'),
+    TUTORIAL: Symbol('TUTORIAL')
 };
 Object.freeze(STATE);
 
@@ -26,28 +27,114 @@ class GameScene extends Scene
 
     create()
     {
+        if(localStorage.getItem('tutorial_done') === '0')
+        {
+            this.state = STATE.TUTORIAL;
+        }
+        else
+        {
+            this.state = STATE.PLAY;
+        }
+        const { width, height } = this.sys.game.canvas;
+        const center_x = width / 2;
+        const center_y = height / 2;
+
         // here not in constructor
         this.is_clicking = false;
-        this.state = STATE.PLAY;
         this.fruit_position = POSITION.TOP;
         this.score = 0;
 
         const cur_bg = this.create_bg();
         this.create_pg();
         this.enemies = this.physics.add.group();
-        this.time.addEvent(
+        if(this.state === STATE.PLAY)
+        {
+            this.time.addEvent(
             {
                 delay: 1500,
                 callback: () => this.add_enemy(),
                 loop: true
             });
+        }
+        else if(this.state === STATE.TUTORIAL)
+        {
+            const lbl_tutorial = this.add.bitmapText(center_x + 40, 10, 'PublicPixel', 'TUTORIAL', 15);
+            const lbl_tap_explain = this.add.bitmapText(center_x, center_y, 'PublicPixel', 'TAP\nthe screen\nto change\ndirection', 20, 1);
+            const each_repeat_time = 1;
+            lbl_tap_explain.setOrigin(0.5, 0.5);
+            this.tweens.add(
+                {
+                    delay: 1000,
+                    targets: lbl_tap_explain,
+                    scale: 0.5,
+                    duration: 2000,
+                    yoyo: true,
+                    completeDelay: 300,
+                    repeat: each_repeat_time,
+                    onComplete: () =>
+                    {
+                        lbl_tap_explain.text = 'collect\ngroceries\nand\nnavoid\nenemies';
+                        this.tweens.add(
+                            {
+                                delay: 1000,
+                                targets: lbl_tap_explain,
+                                scale: 0.5,
+                                duration: 2000,
+                                yoyo: true,
+                                completeDelay: 300,
+                                repeat: each_repeat_time,
+                                onComplete: () =>
+                                {
+                                    lbl_tap_explain.text = 'Good\nluck';
+                                    this.tweens.add(
+                                        {
+                                            delay: 300,
+                                            targets: lbl_tap_explain,
+                                            scale: 0.5,
+                                            duration: 1000,
+                                            completeDelay: 300,
+                                            repeat: each_repeat_time,
+                                            onComplete: () =>
+                                            {
+                                                lbl_tap_explain.destroy();
+                                                lbl_tutorial.destroy();
+                                                localStorage.setItem('tutorial_done', 1);
+                                                this.state = STATE.PLAY;
+                                                this.time.addEvent(
+                                                {
+                                                    delay: 1500,
+                                                    callback: () => this.add_enemy(),
+                                                    loop: true
+                                                });
+                                            }
+                                        }
+                                    );
+                                }
+                            }
+                        );
+                    }
+                }
+            );
+        }
         this.create_fruit();
-        this.lbl_score = this.add.bitmapText(10, 10, 'PublicPixel', '0', 15);
+        this.lbl_score = this.add.bitmapText(center_x-140, 10, 'PublicPixel', '0', 15);
+        
+        // sounds and music
+        this.snd_music = this.sound.add('music', {loop:true});
+        this.snd_coin = this.sound.add('coin');
+        this.snd_hit = this.sound.add('hit');
+        this.play_fx = Boolean(localStorage.sound_flag === '1');
+        this.play_bg_music = Boolean(localStorage.music_flag === '1');
+
+        if(this.play_bg_music)
+        {
+            this.snd_music.play();
+        }
     }
 
     update(time, delta)
     {
-        if (this.state === STATE.PLAY)
+        if (this.state === STATE.PLAY || this.state === STATE.TUTORIAL)
         {
             if (!this.input.activePointer.isDown && this.is_clicking == true)
             {
@@ -59,12 +146,14 @@ class GameScene extends Scene
             }
             if (this.physics.overlap(this.player, this.enemies))
             {
+                if(this.play_fx) this.snd_hit.play();
                 this.ending();
             }
             if (this.physics.overlap(this.player, this.fruit))
             {
+                if(this.play_fx) this.snd_coin.play();
                 this.fruit.destroy();
-                this.score += 5;
+                if (this.state === STATE.PLAY) this.score += 5; // dont increase score on tut!
                 this.fruit_position = (this.fruit_position === POSITION.TOP) ? POSITION.BOTTOM : POSITION.TOP;
                 this.create_fruit();
                 this.lbl_score.text = `${this.score}`;
@@ -267,7 +356,8 @@ class GameScene extends Scene
                         score_table = [
                         {
                             val: this.score,
-                            when: _time_string
+                            when: _time_string,
+                            raw_time: _time
                         }];
                     }
                     else
@@ -276,11 +366,13 @@ class GameScene extends Scene
                         score_table.push(
                         {
                             val: this.score,
-                            when: _time_string
+                            when: _time_string,
+                            raw_time: _time
                         });
                         score_table = take_best(score_table);
                     }
                     localStorage.setItem('scores', JSON.stringify(score_table));
+                    this.snd_music.stop();
                     this.scene.start('scn_menu');
                 }
             }

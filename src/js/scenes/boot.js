@@ -15,6 +15,9 @@ class BootScene extends Scene
 
         this.load.atlas('13kbc', 'obj/cq5.png', 'obj/cq5.json');
         this.load.bitmapFont('PublicPixel', 'obj/publicpixelg.png', 'obj/publicpixelg.xml');
+        this.load.audio('hit', 'obj/hit.wav');
+        this.load.audio('coin', 'obj/coin.wav');
+        this.load.audio('music', 'obj/music.ogg');
 
         this.load.on('progress', this.progress, this);
     }
@@ -31,7 +34,24 @@ class BootScene extends Scene
         this.load_enemies();
         this.loads_pg();
         // Start the menu scene
+        this.load_defaults();
         this.scene.start('scn_menu');
+    }
+
+    load_defaults()
+    {
+        if(localStorage.getItem('tutorial_done') === null)
+        {
+            localStorage.setItem('tutorial_done', '0');
+        }
+        if(localStorage.getItem('sound_flag') === null)
+        {
+            localStorage.setItem('sound_flag', '0');
+        }
+        if(localStorage.getItem('music_flag') === null)
+        {
+            localStorage.setItem('music_flag', '0');
+        }
     }
 
     load_enemies()

@@ -35,24 +35,24 @@ class MenuScene extends Scene
         );
         
         this.btn = this.add.sprite(width / 2, 200, '13kbc', 'btn.png');
-        this.btn.scaleX = 4 ;
+        this.btn.scaleX = 5;
         this.btn.scaleY = 3;
         const btn_start = this.add.bitmapText(width / 2, 200, 'PublicPixel', 'Start Game', 20).setOrigin(0.5, 0.5);
 
         this.btn = this.add.sprite(width / 2, 275, '13kbc', 'btn.png');
-        this.btn.scaleX = 4;
+        this.btn.scaleX = 5;
         this.btn.scaleY = 3;
-        const btn_score = this.add.bitmapText(width / 2, 275, 'PublicPixel', 'Best Scores', 20).setOrigin(0.5, 0.5);//.setTint(0x15783c);
+        const btn_score = this.add.bitmapText(width / 2, 275, 'PublicPixel', 'Best Scores', 20).setOrigin(0.5, 0.5);
 
         this.btn = this.add.sprite(width / 2, 350, '13kbc', 'btn.png');
-        this.btn.scaleX = 4;
+        this.btn.scaleX = 5;
         this.btn.scaleY = 3;
-        const btn_set = this.add.bitmapText(width / 2, 350, 'PublicPixel', 'Settings', 20).setOrigin(0.5, 0.5);//.setTint(0x15783c);
+        const btn_set = this.add.bitmapText(width / 2, 350, 'PublicPixel', 'Settings', 20).setOrigin(0.5, 0.5);
         
         this.btn = this.add.sprite(width / 2, 425, '13kbc', 'btn.png');
-        this.btn.scaleX = 4;
+        this.btn.scaleX = 5;
         this.btn.scaleY = 3;
-        const btn_quit = this.add.bitmapText(width / 2, 425, 'PublicPixel', 'Quit', 20).setOrigin(0.5, 0.5);//.setTint(0x15783c);
+        const btn_quit = this.add.bitmapText(width / 2, 425, 'PublicPixel', 'Quit', 20).setOrigin(0.5, 0.5);
 
 
         const logo = this.add.sprite(width / 2, height - 100, '13kbc', 'logo.png');
@@ -70,7 +70,7 @@ class MenuScene extends Scene
         
 
         btn_start.setInteractive();
-        btn_start.on('pointerover', () =>
+        btn_start.on('pointerup', () =>
         {
             this.tweens.add(
                 {
@@ -81,6 +81,7 @@ class MenuScene extends Scene
                     completeDelay: 300,
                     onComplete: () =>
                     {
+                        this.sound.unlock();
                         this.scene.start('scn_game');
                     }
                 }
@@ -88,7 +89,7 @@ class MenuScene extends Scene
         });
 
         btn_score.setInteractive();
-        btn_score.on('pointerover', () =>
+        btn_score.on('pointerup', () =>
         {
             this.tweens.add(
                 {
@@ -104,9 +105,27 @@ class MenuScene extends Scene
                 }
             );
         });
+
+        btn_set.setInteractive();
+        btn_set.on('pointerup', () =>
+        {
+            this.tweens.add(
+                {
+                    targets: btn_set,
+                    scale: 0.5,
+                    duration: 300,
+                    yoyo: true,
+                    completeDelay: 300,
+                    onComplete: () =>
+                    {
+                        this.scene.start('scn_settings');
+                    }
+                }
+            );
+        });
         
         btn_quit.setInteractive();
-        btn_quit.on('pointerover', () =>
+        btn_quit.on('pointerup', () =>
         {
             this.tweens.add(
                 {

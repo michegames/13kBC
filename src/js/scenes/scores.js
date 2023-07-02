@@ -41,15 +41,15 @@ class ScoreScene extends Scene
         }
 
         this.btn = this.add.sprite(width / 2, 590, '13kbc', 'btn.png');
-        this.btn.scaleX = 4 ;
+        this.btn.scaleX = 5;
         this.btn.scaleY = 3;
-        const btn_start = this.add.bitmapText(width / 2, 590, 'PublicPixel', 'Back!', 20).setOrigin(0.5, 0.5);
-        btn_start.setInteractive();
-        btn_start.on('pointerover', () =>
+        const btn_back = this.add.bitmapText(width / 2, 590, 'PublicPixel', 'Back!', 20).setOrigin(0.5, 0.5);
+        btn_back.setInteractive();
+        btn_back.on('pointerup', () =>
         {
             this.tweens.add(
                 {
-                    targets: btn_start,
+                    targets: btn_back,
                     scale: 0.5,
                     duration: 300,
                     yoyo: true,
