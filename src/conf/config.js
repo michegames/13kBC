@@ -1,5 +1,5 @@
 import 'phaser';
-window.$P = Phaser;
+
 const _width = 640 / (window.innerHeight/window.innerWidth);
 
 const config =

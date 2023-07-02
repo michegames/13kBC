@@ -52,7 +52,6 @@ class GameScene extends Scene
         }
     }
 
-    /* custom fns */
     create_bg()
     {
         const { width, height } = this.sys.game.canvas;
@@ -78,29 +77,11 @@ class GameScene extends Scene
     create_pg()
     {
         const { width, height } = this.sys.game.canvas;
-        /*const players = ['cavegirl.png', 'cavegirl2.png', 'caveman.png', 'caveman2.png'];
-        const player_sprite = players[Phaser.Math.Between(0, players.length - 1)];
-        const t = this.textures.addSpriteSheetFromAtlas('player', { frameHeight: 16, frameWidth: 16, atlas: '13kbc', frame: player_sprite });
-        this.anims.create({
-            key: "walk_d",
-            frameRate: 5,
-            frames: this.anims.generateFrameNumbers('player', {frames:[0,2,4,6]}),
-            repeat: -1
-        });
-        this.anims.create({
-            key: "walk_u",
-            frameRate: 5,
-            frames: this.anims.generateFrameNumbers('player', {frames:[1, 3, 5, 7]}),
-            repeat: -1
-        });*/
-
         const players = ['cavegirl', 'cavegirl2', 'caveman', 'caveman2'];
         
         this.cur_player = players[Phaser.Math.Between(0, players.length - 1)];
         this.cur_animation_walk_up = `${this.cur_player}_walk_u`;
         this.cur_animation_walk_down = `${this.cur_player}_walk_d`;
-
-        //this.player = this.physics.add.sprite(width / 2, height - 70, 'player', 1);
 
         this.player = this.physics.add.sprite(width / 2, height - 70, this.cur_player, 1);
 
@@ -112,7 +93,6 @@ class GameScene extends Scene
         this.physics.add.collider(this.player, this.top_plat, this.plat_collision_reverse, null, this);
         this.physics.add.collider(this.player, this.bottom_plat, this.plat_collision_reverse, null, this);
 
-        //this.player.anims.play('walk_u', true);
         this.player.anims.play(this.cur_animation_walk_up, true);
     }
 
@@ -134,7 +114,6 @@ class GameScene extends Scene
         let enemy = null;
         if(from_left)
         {
-            //enemy = this.enemies.create(-10, y, enemy_texture);
             enemy = this.enemies.create(center_x-230, y, enemy_texture);
             enemy.scale = 3;
             enemy.flipX = true;
@@ -143,7 +122,6 @@ class GameScene extends Scene
         }
         if(from_right)
         {
-            //enemy = this.enemies.create(width+10, y, enemy_texture);
             enemy = this.enemies.create(center_x+230, y, enemy_texture);
             enemy.scale = 3;
             enemy.anims.play(enemy_anim);
@@ -203,7 +181,6 @@ class GameScene extends Scene
                 }
             }
         );
-        //this.scene.start('scn_menu');
     }
 
     plat_collision_reverse()
@@ -212,7 +189,7 @@ class GameScene extends Scene
         {
             this.player.y += 20;
             this.player.setVelocityY(200);
-            //this.player.anims.play('walk_d', true);
+
             this.player.anims.play(this.cur_animation_walk_down, true);
         }
         else
@@ -220,17 +197,16 @@ class GameScene extends Scene
             this.player.y -= 20;
             this.player.setVelocityY(-200);
             this.player.anims.play(this.cur_animation_walk_up, true);
-            //this.player.anims.play('walk_u', true);
         }
     }
 
     reverse()
     {
         this.player.setVelocityY(-this.player.body.velocity.y);
-        //if(this.player.body.velocity.y > 0) this.player.anims.play('walk_d', true);
-        //if(this.player.body.velocity.y < 0) this.player.anims.play('walk_u', true);
-        this.player.anims.play((this.player.body.velocity.y > 0) ? this.cur_animation_walk_down : this.cur_animation_walk_up, true);
-
+        this.player.anims.play((this.player.body.velocity.y > 0) ?
+            this.cur_animation_walk_down :
+            this.cur_animation_walk_up,
+        true);
     }
 };
 
