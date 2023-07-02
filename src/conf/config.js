@@ -22,7 +22,7 @@ const config =
         orientation: Phaser.Scale.Orientation.PORTRAIT,
     },
     pixelArt: true,
-    backgroundColor: '#4488aa',
+    backgroundColor: '#15783c',
     scene:
     []
 };
