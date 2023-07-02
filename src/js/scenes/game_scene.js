@@ -44,8 +44,6 @@ class GameScene extends Scene
         this.create_fruit();
         this.lbl_score = this.add.bitmapText(10, 10, 'PublicPixel', 'Score: 0', 15);
 
-        console.log("cur bs is => "+ cur_bg)
-        window.$L = this.lbl_score;
         if(cur_bg === 'bg3.png')
         {
             
@@ -171,9 +169,19 @@ class GameScene extends Scene
         const vel = Phaser.Math.Between(5, 15) * 10;
 
         let enemy = null;
+
+        const is_widhter = (width>=440)
+
         if(from_left)
         {
-            enemy = this.enemies.create(center_x-230, y, enemy_texture);
+            if(is_widhter)
+            {
+                enemy = this.enemies.create(center_x-230, y, enemy_texture);
+            }
+            else
+            {
+                enemy = this.enemies.create(-10, y, enemy_texture);
+            }
             enemy.scale = 3;
             enemy.flipX = true;
             enemy.anims.play(enemy_anim);
@@ -181,7 +189,14 @@ class GameScene extends Scene
         }
         if(from_right)
         {
-            enemy = this.enemies.create(center_x+230, y, enemy_texture);
+            if(is_widhter)
+            {
+                enemy = this.enemies.create(center_x+230, y, enemy_texture);
+            }
+            else
+            {
+                enemy = this.enemies.create(width+10, y, enemy_texture);
+            }
             enemy.scale = 3;
             enemy.anims.play(enemy_anim);
             enemy.body.velocity.x = -vel;
