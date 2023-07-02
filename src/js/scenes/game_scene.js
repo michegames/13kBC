@@ -30,7 +30,6 @@ class GameScene extends Scene
             callback: () => this.add_enemy(),
             loop: true
         });
-        window.$T = this.time;
     }
 
     update(time, delta)
@@ -39,7 +38,7 @@ class GameScene extends Scene
         {
             if (!this.input.activePointer.isDown && this.isClicking == true)
             {
-                this.reverse();
+                this.reverse(false);
                 this.isClicking = false;
             } else if (this.input.activePointer.isDown && this.isClicking == false)
             {
@@ -49,8 +48,8 @@ class GameScene extends Scene
             {
                 this.ending();
             }
+            this.clean();
         }
-        this.clean();
     }
 
     /* custom fns */
@@ -79,7 +78,7 @@ class GameScene extends Scene
     create_pg()
     {
         const { width, height } = this.sys.game.canvas;
-        const players = ['cavegirl.png', 'cavegirl2.png', 'caveman.png', 'caveman2.png'];
+        /*const players = ['cavegirl.png', 'cavegirl2.png', 'caveman.png', 'caveman2.png'];
         const player_sprite = players[Phaser.Math.Between(0, players.length - 1)];
         const t = this.textures.addSpriteSheetFromAtlas('player', { frameHeight: 16, frameWidth: 16, atlas: '13kbc', frame: player_sprite });
         this.anims.create({
@@ -93,25 +92,34 @@ class GameScene extends Scene
             frameRate: 5,
             frames: this.anims.generateFrameNumbers('player', {frames:[1, 3, 5, 7]}),
             repeat: -1
-        });
+        });*/
 
-        this.player = this.physics.add.sprite(width / 2, height - 70, 'player', 1);
+        const players = ['cavegirl', 'cavegirl2', 'caveman', 'caveman2'];
+        
+        this.cur_player = players[Phaser.Math.Between(0, players.length - 1)];
+        this.cur_animation_walk_up = `${this.cur_player}_walk_u`;
+        this.cur_animation_walk_down = `${this.cur_player}_walk_d`;
+
+        //this.player = this.physics.add.sprite(width / 2, height - 70, 'player', 1);
+
+        this.player = this.physics.add.sprite(width / 2, height - 70, this.cur_player, 1);
+
         this.player.scale = 3;
         this.player.setVelocityY(-200);
         this.player.body.setSize(10,10);
+        this.player.body.setBounceY(1);
 
-        this.physics.add.overlap(this.player, this.top_plat, this.reverse, null, this);
-        this.physics.add.overlap(this.player, this.bottom_plat, this.reverse, null, this);
+        this.physics.add.collider(this.player, this.top_plat, this.plat_collision_reverse, null, this);
+        this.physics.add.collider(this.player, this.bottom_plat, this.plat_collision_reverse, null, this);
 
-        //this.physics.add.overlap(this.player, this.enemies, this.ending, null, this);
-
-        this.player.anims.play('walk_u', true);
-        window.$P = this.player;
+        //this.player.anims.play('walk_u', true);
+        this.player.anims.play(this.cur_animation_walk_up, true);
     }
 
     add_enemy()
     {
         const { width, height } = this.sys.game.canvas;
+        const center_x = width / 2;
 
         const enemies = ['pig1', 'pig2', 'pig3', 'horse', 'cow']
         const enemy_texture = enemies[Phaser.Math.Between(0, enemies.length-1)];
@@ -126,7 +134,8 @@ class GameScene extends Scene
         let enemy = null;
         if(from_left)
         {
-            enemy = this.enemies.create(-10, y, enemy_texture);
+            //enemy = this.enemies.create(-10, y, enemy_texture);
+            enemy = this.enemies.create(center_x-230, y, enemy_texture);
             enemy.scale = 3;
             enemy.flipX = true;
             enemy.anims.play(enemy_anim);
@@ -134,7 +143,8 @@ class GameScene extends Scene
         }
         if(from_right)
         {
-            enemy = this.enemies.create(width+10, y, enemy_texture);
+            //enemy = this.enemies.create(width+10, y, enemy_texture);
+            enemy = this.enemies.create(center_x+230, y, enemy_texture);
             enemy.scale = 3;
             enemy.anims.play(enemy_anim);
             enemy.body.velocity.x = -vel;
@@ -144,10 +154,31 @@ class GameScene extends Scene
     clean()
     {
         const { width, height } = this.sys.game.canvas;
+        const center_x = width / 2;
+
         const arr = this.enemies.getChildren();
         for(let x=arr.length-1; x>=0; x--)
         {
-            if(arr[x].x > width+24) arr[x].destroy();
+            if((arr[x].x > center_x + 250) || (arr[x].x < center_x - 250))
+            {
+                arr[x].destroy();
+            }
+        }
+    }
+
+    enemies_clean_all()
+    {
+        const arr = this.enemies.getChildren();
+        for(let x=arr.length-1; x>=0; x--)
+        {
+            try
+            {
+                arr[x].destroy();
+            }
+            catch (error)
+            {
+                console.error(error);
+            }
         }
     }
 
@@ -157,7 +188,7 @@ class GameScene extends Scene
         this.state === STATE.GAMEOVER;
         this.player.setVelocityY(0);
         this.player.anims.stop();
-
+        this.enemies_clean_all();
         this.tweens.add(
             {
                 targets: this.player,
@@ -175,11 +206,31 @@ class GameScene extends Scene
         //this.scene.start('scn_menu');
     }
 
+    plat_collision_reverse()
+    {
+        if(this.player.body.velocity.y > 0)
+        {
+            this.player.y += 20;
+            this.player.setVelocityY(200);
+            //this.player.anims.play('walk_d', true);
+            this.player.anims.play(this.cur_animation_walk_down, true);
+        }
+        else
+        {
+            this.player.y -= 20;
+            this.player.setVelocityY(-200);
+            this.player.anims.play(this.cur_animation_walk_up, true);
+            //this.player.anims.play('walk_u', true);
+        }
+    }
+
     reverse()
     {
         this.player.setVelocityY(-this.player.body.velocity.y);
-        if(this.player.body.velocity.y > 0) this.player.anims.play('walk_d', true);
-        if(this.player.body.velocity.y < 0) this.player.anims.play('walk_u', true);
+        //if(this.player.body.velocity.y > 0) this.player.anims.play('walk_d', true);
+        //if(this.player.body.velocity.y < 0) this.player.anims.play('walk_u', true);
+        this.player.anims.play((this.player.body.velocity.y > 0) ? this.cur_animation_walk_down : this.cur_animation_walk_up, true);
+
     }
 };
 

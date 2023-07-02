@@ -19,7 +19,7 @@ const config =
     {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        orientation: Phaser.Scale.Orientation.PORTRAIT
+        orientation: Phaser.Scale.Orientation.PORTRAIT,
     },
     pixelArt: true,
     backgroundColor: '#4488aa',
