@@ -6,6 +6,9 @@ import BootScene from './js/scenes/boot';
 import MenuScene from './js/scenes/menu';
 import ScoreScene from './js/scenes/scores';
 import SettingsScene from './js/scenes/settings';
+import Phaser from 'phaser';
+
+window.$P = Phaser;
 
 config.scene.push(BootScene);
 config.scene.push(MenuScene);
