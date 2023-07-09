@@ -6,11 +6,38 @@
     <meta name="google" content="notranslate" />
     <link rel="icon" type="image/svg+xml" href="/icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .title {
+            padding: 25% 0;
+        }
+        #rotate {
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: none;
+            background-size: 50% !important;
+            background-position-x: center !important;
+            background-position-y: center !important;
+            background-repeat: no-repeat !important;
+            text-align: center;
+            display: none;
+            background: url('data:image/png;base64,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');
+        }
+    </style>
     <title>Crazed Quadrupedes</title>
 </head>
 
 <body>
-    <div id="app"></div>
+    <div id="game"></div>
+    <div id="rotate">
+        <h1 class="title">
+            This game work better in Portrait mode, please rotate.
+        </h1>
+    </div>
     <script type="module" src="./src/main.js"></script>
 </body>
 

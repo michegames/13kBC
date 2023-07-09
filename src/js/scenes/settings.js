@@ -18,9 +18,16 @@ class SettingsScene extends Scene
             (localStorage.sound_flag === '0') ? 'Sound Off' : 'Sound On',
             function()
             {
-                localStorage.sound_flag = (localStorage.sound_flag === '0') ? 1 : 0;
-                const btn_snd_text = (localStorage.sound_flag === '0') ? 'Sound Off' : 'Sound On';
-                btn_snd_ref.reference.text.text = btn_snd_text;
+                try
+                {
+                    localStorage.sound_flag = (localStorage.sound_flag === '0') ? 1 : 0;
+                    const btn_snd_text = (localStorage.sound_flag === '0') ? 'Sound Off' : 'Sound On';
+                    btn_snd_ref.reference.text.text = btn_snd_text;
+                }
+                catch(err)
+                {
+                    console.log(err);
+                }
             }
         );
 
@@ -28,9 +35,16 @@ class SettingsScene extends Scene
             (localStorage.music_flag === '0') ? 'Music Off' : 'Music On',
             function()
             {
-                localStorage.music_flag = (localStorage.music_flag === '0') ? 1 : 0;
-                const btn_music_text = (localStorage.music_flag === '0') ? 'Music Off' : 'Music On';
-                btn_music.reference.text.text = btn_music_text;
+                try
+                {
+                    localStorage.music_flag = (localStorage.music_flag === '0') ? 1 : 0;
+                    const btn_music_text = (localStorage.music_flag === '0') ? 'Music Off' : 'Music On';
+                    btn_music.reference.text.text = btn_music_text;
+                }
+                catch(err)
+                {
+                    console.log(err);
+                }
             }
         );
 
@@ -38,9 +52,16 @@ class SettingsScene extends Scene
             (localStorage.tutorial_done === '0') ? 'Tutorial On' : 'Tutorial Off',
             function()
             {
-                localStorage.tutorial_done = (localStorage.tutorial_done === '0') ? 1 : 0;
-                const btn_tutorial_text = (localStorage.tutorial_done === '0') ? 'Tutorial On' : 'Tutorial Off';
-                btn_tutorial.reference.text.text = btn_tutorial_text;
+                try
+                {
+                    localStorage.tutorial_done = (localStorage.tutorial_done === '0') ? 1 : 0;
+                    const btn_tutorial_text = (localStorage.tutorial_done === '0') ? 'Tutorial On' : 'Tutorial Off';
+                    btn_tutorial.reference.text.text = btn_tutorial_text;
+                }
+                catch(err)
+                {
+                    console.log(err);
+                }
             }
         );
 

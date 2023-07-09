@@ -61,38 +61,40 @@ class GameScene extends Scene
             const lbl_tutorial = this.add.bitmapText(center_x + 40, 10, 'PublicPixel', 'TUTORIAL', 15);
             const lbl_tap_explain = this.add.bitmapText(center_x, center_y, 'PublicPixel', 'TAP\nthe screen\nto change\ndirection', 20, 1);
             const each_repeat_time = 1;
+            const anim_time = 1000;
+            const delay_time = 500;
             lbl_tap_explain.setOrigin(0.5, 0.5);
             this.tweens.add(
                 {
-                    delay: 1000,
+                    delay: delay_time,
                     targets: lbl_tap_explain,
                     scale: 0.5,
-                    duration: 2000,
+                    duration: anim_time,
                     yoyo: true,
-                    completeDelay: 300,
+                    completeDelay: delay_time / 3,
                     repeat: each_repeat_time,
                     onComplete: () =>
                     {
                         lbl_tap_explain.text = 'collect\ngroceries\nand\nnavoid\nenemies';
                         this.tweens.add(
                             {
-                                delay: 1000,
+                                delay: delay_time,
                                 targets: lbl_tap_explain,
                                 scale: 0.5,
-                                duration: 2000,
+                                duration: anim_time,
                                 yoyo: true,
-                                completeDelay: 300,
+                                completeDelay: delay_time / 3,
                                 repeat: each_repeat_time,
                                 onComplete: () =>
                                 {
                                     lbl_tap_explain.text = 'Good\nluck';
                                     this.tweens.add(
                                         {
-                                            delay: 300,
+                                            delay: delay_time / 3,
                                             targets: lbl_tap_explain,
                                             scale: 0.5,
-                                            duration: 1000,
-                                            completeDelay: 300,
+                                            duration: anim_time / 2,
+                                            completeDelay: delay_time / 3,
                                             repeat: each_repeat_time,
                                             onComplete: () =>
                                             {

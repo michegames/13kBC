@@ -8,6 +8,7 @@ class MenuScene extends Scene
         super('scn_menu');
         this.make_btn = _make_btn.bind(this);
         this.make_title = _make_title.bind(this);
+        window.$S = this;
     }
 
     _make_logo()

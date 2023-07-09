@@ -20,8 +20,9 @@ const config =
     {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        orientation: Phaser.Scale.Orientation.PORTRAIT,
+        orientation: Phaser.Scale.Orientation.PORTRAIT
     },
+    parent: 'game',
     pixelArt: true,
     backgroundColor: '#15783c',
     scene:

@@ -54,7 +54,10 @@ function _make_title()
     );
 }
 
+const _is_mobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
 export {
     _make_btn,
-    _make_title
+    _make_title,
+    _is_mobile
 }
