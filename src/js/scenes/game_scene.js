@@ -47,6 +47,16 @@ class GameScene extends Scene
         const cur_bg = this.create_bg();
         this.create_pg();
         this.enemies = this.physics.add.group();
+        this.physics.add.collider(this.enemies, this.enemies, function (a, b)
+        {
+            //a.body.velocity.x = -a.body.velocity.x;
+            //b.body.velocity.x = -b.body.velocity.x;
+            a.flipX = !a.flipX;
+            b.flipX = !b.flipX;
+            console.log("collision");
+            window.$A = a;
+            window.$B = b;
+        });
         if(this.state === STATE.PLAY)
         {
             this.time.addEvent(
@@ -253,7 +263,16 @@ class GameScene extends Scene
         const enemies = ['pig1', 'pig2', 'pig3', 'horse', 'cow']
         const enemy_texture = enemies[Phaser.Math.Between(0, enemies.length - 1)];
         const enemy_anim = `${enemy_texture}_walk`;
-        const y = Phaser.Math.Between(10, 55) * 10;
+
+        let _y_line = Phaser.Math.Between(0, 16);
+
+        while(!this.is_in_enemies_y(_y_line))
+        {
+            _y_line = Phaser.Math.Between(0, 16);
+        }
+
+
+        const y = 100 + (_y_line * 25);
 
         const from_right = Phaser.Math.Between(0, 1);
         const from_left = (from_right === 1) ? 0 : 1;
@@ -264,6 +283,7 @@ class GameScene extends Scene
 
         const is_widhter = (width >= 440)
 
+        window.$E = enemy;
         if (from_left)
         {
             if (is_widhter)
@@ -293,6 +313,8 @@ class GameScene extends Scene
             enemy.anims.play(enemy_anim);
             enemy.body.velocity.x = -vel;
         }
+        //enemy.body.setBounceX(1);
+        enemy._y_line = _y_line;
     }
 
     clean()
@@ -324,6 +346,24 @@ class GameScene extends Scene
                 console.error(error);
             }
         }
+    }
+
+    is_in_enemies_y(num)
+    {
+        const tmp = this.enemies_get_y_lines();
+        if(tmp.indexOf(num) > -1) return false;
+        return true;
+    }
+
+    enemies_get_y_lines()
+    {
+        let tmp = [];
+        const arr = this.enemies.getChildren();
+        for (let x = arr.length - 1; x >= 0; x--)
+        {
+            tmp.push(arr[x]._y_line);
+        }
+        return tmp;
     }
 
     ending()
