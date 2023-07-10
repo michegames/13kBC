@@ -17,7 +17,7 @@ class BootScene extends Scene
         this.load.bitmapFont('PublicPixel', 'obj/publicpixelg.png', 'obj/publicpixelg.xml');
         this.load.audio('hit', 'obj/hit.wav');
         this.load.audio('coin', 'obj/coin.wav');
-        this.load.audio('music', 'obj/music.ogg');
+        this.load.audio('music', ['obj/music96k.ogg', 'obj/music96k.mp3']);
 
         this.load.on('progress', this.progress, this);
     }
