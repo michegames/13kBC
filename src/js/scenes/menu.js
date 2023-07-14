@@ -1,12 +1,12 @@
 import { Scene } from 'phaser';
-import { _make_btn, _make_title } from '../lib/helpers';
+import { _make_btn_menu, _make_title } from '../lib/helpers';
 
 class MenuScene extends Scene
 {
     constructor()
     {
         super('scn_menu');
-        this.make_btn = _make_btn.bind(this);
+        this.make_btn = _make_btn_menu.bind(this);
         this.make_title = _make_title.bind(this);
         window.$S = this;
     }

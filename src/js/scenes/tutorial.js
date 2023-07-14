@@ -133,6 +133,7 @@ class TutorialScene extends Scene
                 this.tut_btn_ref.setVisible(false);
                 this.player.setVelocityY(-200);
                 this.state = STATE.PLAY;
+                localStorage.tutorial_done = 1;
                 this.scene.start('scn_game');
             },
             scale_x: 6,

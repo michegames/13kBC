@@ -1,4 +1,4 @@
-function _make_btn(y, text, on_complete)
+function _make_btn_menu(y, text, on_complete)
 {
     const { width, height } = this.sys.game.canvas;
     const make_btn_raw = _make_btn_raw.bind(this);
@@ -17,6 +17,25 @@ function _make_btn(y, text, on_complete)
         y: y,
         text: text,
         on_complete: new_complete,
+        scale_x: 5,
+        scale_y: 3,
+        text_size: 20,
+        yoyo: true,
+        duration: 300,
+        delay: 300
+    });
+}
+
+function _make_btn(y, text, on_complete)
+{
+    const { width, height } = this.sys.game.canvas;
+    const make_btn_raw = _make_btn_raw.bind(this);
+    make_btn_raw(
+    {
+        x: width / 2,
+        y: y,
+        text: text,
+        on_complete: on_complete,
         scale_x: 5,
         scale_y: 3,
         text_size: 20,
@@ -97,6 +116,7 @@ const _is_mobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Ope
 
 export
 {
+    _make_btn_menu,
     _make_btn,
     _make_title,
     _is_mobile,

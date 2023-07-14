@@ -41,8 +41,9 @@ class GameScene extends Scene
         this.enemies = this.physics.add.group();
         this.physics.add.collider(this.enemies, this.enemies, function (a, b)
         {
-            a.flipX = !a.flipX;
-            b.flipX = !b.flipX;
+            a.flipX = a.body.velocity.x > 0;
+            b.flipX = b.body.velocity.x > 0;
+
         });
         if(this.state === STATE.PLAY)
         {
@@ -237,7 +238,7 @@ class GameScene extends Scene
             enemy.anims.play(enemy_anim);
             enemy.body.velocity.x = -vel;
         }
-        //enemy.body.setBounceX(1);
+        enemy.body.setBounceX(1);
         enemy._y_line = _y_line;
     }
 
