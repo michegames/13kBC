@@ -29,6 +29,7 @@ class MenuScene extends Scene
 
     create()
     {
+        this.cameras.main.fadeIn(600, 0, 0, 0);
         const buttons =
         [
             {
@@ -37,7 +38,14 @@ class MenuScene extends Scene
                 on_complete: function()
                 {
                     this.sound.unlock();
-                    this.scene.start('scn_game');   
+                    if(localStorage.getItem('tutorial_done') === '0')
+                    {
+                        this.scene.start('scn_tuts');
+                    }
+                    else
+                    {
+                        this.scene.start('scn_game');
+                    }
                 }
             },
             {
@@ -63,7 +71,7 @@ class MenuScene extends Scene
                 {
                     window.close();
                 }
-            },            
+            },
         ];
         
         this.make_title();

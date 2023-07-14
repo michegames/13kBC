@@ -6,6 +6,7 @@ import BootScene from './js/scenes/boot';
 import MenuScene from './js/scenes/menu';
 import ScoreScene from './js/scenes/scores';
 import SettingsScene from './js/scenes/settings';
+import TutorialScene from './js/scenes/tutorial';
 import { _is_mobile } from './js/lib/helpers';
 
 config.scene.push(BootScene);
@@ -13,6 +14,7 @@ config.scene.push(MenuScene);
 config.scene.push(GameScene);
 config.scene.push(ScoreScene);
 config.scene.push(SettingsScene);
+config.scene.push(TutorialScene);
 
 function start_cb()
 {

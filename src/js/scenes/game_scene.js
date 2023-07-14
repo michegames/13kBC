@@ -4,8 +4,7 @@ const STATE =
 {
     PLAY: Symbol('PLAY'),
     PAUSE: Symbol('PAUSE'),
-    GAMEOVER: Symbol('GAMEOVER'),
-    TUTORIAL: Symbol('TUTORIAL')
+    GAMEOVER: Symbol('GAMEOVER')
 };
 Object.freeze(STATE);
 
@@ -27,14 +26,7 @@ class GameScene extends Scene
 
     create()
     {
-        if(localStorage.getItem('tutorial_done') === '0')
-        {
-            this.state = STATE.TUTORIAL;
-        }
-        else
-        {
-            this.state = STATE.PLAY;
-        }
+        this.state = STATE.PLAY;
         const { width, height } = this.sys.game.canvas;
         const center_x = width / 2;
         const center_y = height / 2;
@@ -49,13 +41,8 @@ class GameScene extends Scene
         this.enemies = this.physics.add.group();
         this.physics.add.collider(this.enemies, this.enemies, function (a, b)
         {
-            //a.body.velocity.x = -a.body.velocity.x;
-            //b.body.velocity.x = -b.body.velocity.x;
             a.flipX = !a.flipX;
             b.flipX = !b.flipX;
-            console.log("collision");
-            window.$A = a;
-            window.$B = b;
         });
         if(this.state === STATE.PLAY)
         {
@@ -66,68 +53,6 @@ class GameScene extends Scene
                 loop: true
             });
         }
-        else if(this.state === STATE.TUTORIAL)
-        {
-            const lbl_tutorial = this.add.bitmapText(center_x + 40, 10, 'PublicPixel', 'TUTORIAL', 15);
-            const lbl_tap_explain = this.add.bitmapText(center_x, center_y, 'PublicPixel', 'TAP\nthe screen\nto change\ndirection', 20, 1);
-            const each_repeat_time = 1;
-            const anim_time = 1000;
-            const delay_time = 500;
-            lbl_tap_explain.setOrigin(0.5, 0.5);
-            this.tweens.add(
-                {
-                    delay: delay_time,
-                    targets: lbl_tap_explain,
-                    scale: 0.5,
-                    duration: anim_time,
-                    yoyo: true,
-                    completeDelay: delay_time / 3,
-                    repeat: each_repeat_time,
-                    onComplete: () =>
-                    {
-                        lbl_tap_explain.text = 'collect\ngroceries\nand\nnavoid\nenemies';
-                        this.tweens.add(
-                            {
-                                delay: delay_time,
-                                targets: lbl_tap_explain,
-                                scale: 0.5,
-                                duration: anim_time,
-                                yoyo: true,
-                                completeDelay: delay_time / 3,
-                                repeat: each_repeat_time,
-                                onComplete: () =>
-                                {
-                                    lbl_tap_explain.text = 'Good\nluck';
-                                    this.tweens.add(
-                                        {
-                                            delay: delay_time / 3,
-                                            targets: lbl_tap_explain,
-                                            scale: 0.5,
-                                            duration: anim_time / 2,
-                                            completeDelay: delay_time / 3,
-                                            repeat: each_repeat_time,
-                                            onComplete: () =>
-                                            {
-                                                lbl_tap_explain.destroy();
-                                                lbl_tutorial.destroy();
-                                                localStorage.setItem('tutorial_done', 1);
-                                                this.state = STATE.PLAY;
-                                                this.time.addEvent(
-                                                {
-                                                    delay: 1500,
-                                                    callback: () => this.add_enemy(),
-                                                    loop: true
-                                                });
-                                            }
-                                        }
-                                    );
-                                }
-                            }
-                        );
-                    }
-                }
-            );
-        }
         this.create_fruit();
 
         const lbl_bg = this.add.sprite(center_x-140, 20, '13kbc', 'btn.png');
@@ -136,7 +61,6 @@ class GameScene extends Scene
 
         this.lbl_score = this.add.bitmapText(center_x-140, 20, 'PublicPixel', '0', 15);
         this.lbl_score.setOrigin(0.5, 0.5);
-        window.$L = this.lbl_score;
         
         // sounds and music
         this.snd_music = this.sound.add('music', {loop:true});
@@ -153,7 +77,7 @@ class GameScene extends Scene
 
     update(time, delta)
     {
-        if (this.state === STATE.PLAY || this.state === STATE.TUTORIAL)
+        if (this.state === STATE.PLAY)
         {
             if (!this.input.activePointer.isDown && this.is_clicking == true)
             {
