@@ -1,8 +1,8 @@
 {
-    "name": "App Name",
+    "name": "Crazed Quadrupedes",
     "version": "1.0.0",
     "build": 1,
-    "id": "com.example.appname",
+    "id": "com.michelangelog.13kbc",
     "fullscreen": true, 
     "orientation": "portrait",
     "plugins": [],
@@ -12,8 +12,8 @@
         {
             "release":
             {
-                "name": "NAME",
-                "secret": "SECRET"
+                "name": "13kbc",
+                "secret": "23803268018780b182deb952f9319108"
             }
         }
     },
