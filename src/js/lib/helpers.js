@@ -11,7 +11,7 @@ function _make_btn_menu(y, text, on_complete)
             _on_complete();
         });
     }
-    make_btn_raw(
+    return make_btn_raw(
     {
         x: width / 2,
         y: y,
@@ -30,7 +30,7 @@ function _make_btn(y, text, on_complete)
 {
     const { width, height } = this.sys.game.canvas;
     const make_btn_raw = _make_btn_raw.bind(this);
-    make_btn_raw(
+    return make_btn_raw(
     {
         x: width / 2,
         y: y,

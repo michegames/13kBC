@@ -69,7 +69,15 @@ class MenuScene extends Scene
                 y: 425,
                 on_complete: function()
                 {
-                    window.close();
+                    try
+                    {
+                        navigator.app.exitApp();
+                    }
+                    catch (error)
+                    {
+                        console.error(error);
+                        window.close();
+                    }
                 }
             },
         ];

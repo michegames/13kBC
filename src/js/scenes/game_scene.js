@@ -56,11 +56,11 @@ class GameScene extends Scene
         }
         this.create_fruit();
 
-        const lbl_bg = this.add.sprite(center_x-140, 20, '13kbc', 'btn.png');
+        const lbl_bg = this.add.sprite(center_x-100, 20, '13kbc', 'btn.png');
         lbl_bg.scaleX = 1;
         lbl_bg.scaleY = 1.5;
 
-        this.lbl_score = this.add.bitmapText(center_x-140, 20, 'PublicPixel', '0', 15);
+        this.lbl_score = this.add.bitmapText(center_x-100, 20, 'PublicPixel', '0', 15);
         this.lbl_score.setOrigin(0.5, 0.5);
         
         // sounds and music
