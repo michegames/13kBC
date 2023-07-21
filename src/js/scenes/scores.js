@@ -17,7 +17,7 @@ class ScoreScene extends Scene
 
         this.add.rectangle(width / 2, 340, width, 420, 0xffffff);
 
-        const scores = localStorage.getItem('scores');
+        const scores = window.STORAGE.get('scores');
         if(scores !== null)
         {
             const tmp = JSON.parse(scores);

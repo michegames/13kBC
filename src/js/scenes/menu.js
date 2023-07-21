@@ -65,7 +65,7 @@ class MenuScene extends Scene
                 on_complete: function()
                 {
                     this.sound.unlock();
-                    if(localStorage.getItem('tutorial_done') === '0')
+                    if(window.STORAGE.get('tutorial_done') === '0')
                     {
                         this.scene.start('scn_tuts');
                     }

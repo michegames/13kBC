@@ -51,17 +51,17 @@ class BootScene extends Scene
 
     load_defaults()
     {
-        if(localStorage.getItem('tutorial_done') === null)
+        if(window.STORAGE.get('tutorial_done') === null)
         {
-            localStorage.setItem('tutorial_done', '0');
+            window.STORAGE.set('tutorial_done', '0');
         }
-        if(localStorage.getItem('sound_flag') === null)
+        if(window.STORAGE.get('sound_flag') === null)
         {
-            localStorage.setItem('sound_flag', '0');
+            window.STORAGE.set('sound_flag', '0');
         }
-        if(localStorage.getItem('music_flag') === null)
+        if(window.STORAGE.get('music_flag') === null)
         {
-            localStorage.setItem('music_flag', '0');
+            window.STORAGE.set('music_flag', '0');
         }
     }
 

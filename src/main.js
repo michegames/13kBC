@@ -23,6 +23,13 @@ window.$GLOBALS =
     green: '#387642'
 }
 
+window.STORAGE = new window.Basil(
+{
+    namespace: '13kbc',
+    storages: ['local', 'session', 'memory'],
+    storage: 'local'
+});
+
 function start_cb()
 {
     console.log('staring callback');

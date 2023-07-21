@@ -73,8 +73,8 @@ class GameScene extends Scene
         this.snd_music = this.sound.add('music', {loop:true});
         this.snd_coin = this.sound.add('coin');
         this.snd_hit = this.sound.add('hit');
-        this.play_fx = Boolean(localStorage.sound_flag === '1');
-        this.play_bg_music = Boolean(localStorage.music_flag === '1');
+        this.play_fx = Boolean(window.STORAGE.get('sound_flag') === '1');
+        this.play_bg_music = Boolean(window.STORAGE.get('music_flag') === '1');
 
         if(this.play_bg_music)
         {
@@ -344,7 +344,7 @@ class GameScene extends Scene
                 {
                     const _time = new Date();
                     const _time_string = `${_time.toLocaleDateString()}\n${_time.toLocaleTimeString()}`;
-                    let score_table = localStorage.getItem('scores');
+                    let score_table = window.STORAGE.get('scores');
                     if (score_table === null)
                     {
                         score_table = [
@@ -365,7 +365,7 @@ class GameScene extends Scene
                         });
                         score_table = take_best(score_table);
                     }
-                    localStorage.setItem('scores', JSON.stringify(score_table));
+                    window.STORAGE.set('scores', JSON.stringify(score_table));
                     this.snd_music.stop();
                     this.scene.start('scn_menu');
                 }
