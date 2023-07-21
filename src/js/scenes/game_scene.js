@@ -189,6 +189,20 @@ class GameScene extends Scene
 
     add_enemy()
     {
+        if(
+            (this.enemies.getChildren.length >= 3) &&
+            (this.score <= 30)
+        )
+        {
+            return -1;
+        }
+        else if(
+            (this.enemies.getChildren.length >= 4) &&
+            (this.score <= 50)
+        )
+        {
+            return -1;
+        }
         const { width, height } = this.sys.game.canvas;
         const center_x = width / 2;
 
@@ -215,7 +229,6 @@ class GameScene extends Scene
 
         const is_widhter = (width >= 440)
 
-        window.$E = enemy;
         if (from_left)
         {
             if (is_widhter)

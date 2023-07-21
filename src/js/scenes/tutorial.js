@@ -86,7 +86,7 @@ class TutorialScene extends Scene
             },
             scale_x: 6,
             scale_y: 20,
-            text_size: 15
+            text_size: 20
         }).reference.group;
     }
 
@@ -134,11 +134,11 @@ class TutorialScene extends Scene
                 this.player.setVelocityY(-200);
                 this.state = STATE.PLAY;
                 localStorage.tutorial_done = 1;
-                this.scene.start('scn_game');
+                this.scene.start('scn_game', {pg:'cavegirl'});
             },
             scale_x: 6,
             scale_y: 20,
-            text_size: 15
+            text_size: 20
         }).reference.group;
     }
 

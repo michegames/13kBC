@@ -19,7 +19,7 @@ function _make_btn_menu(y, text, on_complete)
         on_complete: new_complete,
         scale_x: 4,
         scale_y: 3,
-        text_size: 20,
+        text_size: 30,
         yoyo: true,
         duration: 300,
         delay: 300
@@ -61,8 +61,11 @@ function _make_btn_raw(obj)
     const btn_bg = this.add.sprite(x, y, '13kbc', 'btn.png');
     btn_bg.scaleX = scale_x;
     btn_bg.scaleY = scale_y;
-    const btn_text = this.add.bitmapText(x, y, 'PublicPixel', text, text_size, 1)
-        .setOrigin(0.5, 0.5);
+
+    const btn_text = this.add.text(x, y, text, { font: `bold ${text_size}px monospace`, fill: $GLOBALS.green, align: 'center' }).setOrigin(0.5);
+
+    /*const btn_text = this.add.bitmapText(x, y, 'PublicPixel', text, text_size, 1)
+        .setOrigin(0.5, 0.5);*/
 
     const btn_grp = this.add.group();
     btn_grp.addMultiple([btn_bg, btn_text]);
@@ -100,7 +103,8 @@ function _make_title()
     this.add.rectangle(width / 2, 60, width, 120, 0xffffff);
     this.add.rectangle(width / 2, 120, width, 20, 0xffad5d);
     this.add.rectangle(width / 2, 130, width, 10, 0x000000);
-    const title = this.add.bitmapText(width / 2, 60, 'PublicPixel', 'Crazed\nQuadrupeds', 30, 1).setOrigin(0.5, 0.5);
+    const title = this.add.text(width/2, 60, 'Crazed\n Quadrupedes', { font: 'bold 40px monospace', fill: $GLOBALS.green, align: 'center' }).setOrigin(0.5);
+    //const title = this.add.bitmapText(width / 2, 60, 'PublicPixel', 'Crazed\nQuadrupeds', 30, 1).setOrigin(0.5, 0.5);
     this.tweens.add(
         {
             targets: title,

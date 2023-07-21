@@ -18,6 +18,11 @@ config.scene.push(SettingsScene);
 config.scene.push(TutorialScene);
 config.scene.push(SelectScene);
 
+window.$GLOBALS =
+{
+    green: '#387642'
+}
+
 function start_cb()
 {
     console.log('staring callback');
