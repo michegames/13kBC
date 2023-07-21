@@ -28,6 +28,7 @@ class BootScene extends Scene
         this.load.audio('music', ['obj/music96k.ogg', 'obj/music96k.mp3']);
 
         this.load.on('progress', this.progress, this);
+        this.load.on(Phaser.Loader.Events.COMPLETE, () => this._create_gfx());
     }
 
     progress(value)
@@ -39,7 +40,7 @@ class BootScene extends Scene
         this.progressbar.width = (width-40) * value;
     }
 
-    create()
+    _create_gfx()
     {
         this.load_enemies();
         this.loads_pg();
