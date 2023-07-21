@@ -13,22 +13,49 @@ class MenuScene extends Scene
 
     _make_logo()
     {
+        let counter = 0;
         const { width, height } = this.sys.game.canvas;
-        const logo = this.add.sprite(width / 2, height - 100, '13kbc', 'logo_cow.png');
-        this.tweens.add(
+        const logo = this.add.sprite(width / 2, height - 100, '13kbc', 'logo_pig.png');
+
+        let clicking = false;
+
+        logo.setInteractive({ useHandCursor: true });
+        logo.on('pointerup', () =>
+        {
+            if(clicking === true)
             {
-                targets: logo,
-                scale: 0.5,
-                duration: 700,
-                yoyo: true,
-                completeDelay: 300,
-                repeat: -1
+                return -1;
             }
-        );
+            clicking = true;
+            this.tweens.add(
+                {
+                    targets: logo,
+                    scale: 0.5,
+                    duration: 300,
+                    yoyo: true,
+                    onComplete: () =>
+                    {
+                        counter += 1;
+                        if(counter >= 5)
+                        {
+                            logo.destroy(true);
+                            this.add.sprite(width / 2, height - 100, '13kbc', 'logo_cow.png');
+                            this.unlocked = true;
+                            clicking = true;
+                        }
+                        else
+                        {
+                            clicking = false;
+                        }
+                    }
+                }
+            );
+        });
     }
 
     create()
     {
+        this.unlocked = false;
         this.cameras.main.fadeIn(600, 0, 0, 0);
         const buttons =
         [
@@ -44,7 +71,7 @@ class MenuScene extends Scene
                     }
                     else
                     {
-                        this.scene.start('scn_select');
+                        this.scene.start('scn_select', {unlocked: this.unlocked});
                     }
                 }
             },

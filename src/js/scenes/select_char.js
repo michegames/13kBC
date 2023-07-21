@@ -24,7 +24,7 @@ class SelectScene extends Scene
         const { width, height } = this.sys.game.canvas;
         const center_x = width / 2;
         const center_y = height / 2;
-        
+
         pg.setInteractive({ useHandCursor: true });
         pg.on('pointerup', () =>
         {
@@ -49,6 +49,12 @@ class SelectScene extends Scene
         });
     }
 
+    init(config)
+    {
+        console.log('config is => ' + JSON.stringify(config));
+        this.unlocked = config.unlocked;
+    }
+
     create()
     {
         const { width, height } = this.sys.game.canvas;
@@ -59,7 +65,7 @@ class SelectScene extends Scene
 
         const select = this.add.text(width/2, height-100, 'Select\n your character', { font: '30px monospace', fill: '#fff', align: 'center' }).setOrigin(0.5);
 
-        const offset = 70;
+        const offset = (this.unlocked === true) ? 100 : 70;
 
         const p1 = this._create_selectable_pg(center_x -offset, center_y -offset, 'cavegirl');
         const p2 = this._create_selectable_pg(center_x +offset, center_y -offset, 'cavegirl2');
@@ -70,6 +76,23 @@ class SelectScene extends Scene
         this._create_button_for_pg(p2, 'cavegirl2', [p1,p3,p4, select]);
         this._create_button_for_pg(p3, 'caveman', [p1,p2,p4, select]);
         this._create_button_for_pg(p4, 'caveman2', [p1,p2,p3, select]);
+
+        if(this.unlocked === true)
+        {
+            const p5 = this._create_selectable_pg(center_x, center_y, 'boy');
+            this._create_button_for_pg(p5, 'boy', [p1,p2,p3,p4, select]);
+            this._create_button_for_pg(p1, 'cavegirl', [p2,p3,p4,p5, select]);
+            this._create_button_for_pg(p2, 'cavegirl2', [p1,p3,p4,p5, select]);
+            this._create_button_for_pg(p3, 'caveman', [p1,p2,p4,p5, select]);
+            this._create_button_for_pg(p4, 'caveman2', [p1,p2,p3,p5, select]);
+        }
+        else
+        {
+            this._create_button_for_pg(p1, 'cavegirl', [p2,p3,p4, select]);
+            this._create_button_for_pg(p2, 'cavegirl2', [p1,p3,p4, select]);
+            this._create_button_for_pg(p3, 'caveman', [p1,p2,p4, select]);
+            this._create_button_for_pg(p4, 'caveman2', [p1,p2,p3, select]);
+        }
 
     }
 

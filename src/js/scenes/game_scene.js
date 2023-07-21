@@ -189,20 +189,25 @@ class GameScene extends Scene
 
     add_enemy()
     {
+        console.log('ADD enemy, score: '+this.score);
+        console.log('ADD enemy, len: '+this.enemies.getChildren().length);
         if(
-            (this.enemies.getChildren.length >= 3) &&
+            (this.enemies.getChildren().length >= 3) &&
             (this.score <= 30)
         )
         {
+            console.log("'A");
             return -1;
         }
         else if(
-            (this.enemies.getChildren.length >= 4) &&
+            (this.enemies.getChildren().length >= 4) &&
             (this.score <= 50)
         )
         {
+            console.log("'B");
             return -1;
         }
+        console.log("'C");
         const { width, height } = this.sys.game.canvas;
         const center_x = width / 2;
 
