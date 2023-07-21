@@ -47,6 +47,7 @@ class BootScene extends Scene
         // Start the menu scene
         this.load_defaults();
         this.scene.start('scn_menu');
+        PokiSDK.gameLoadingFinished();
     }
 
     load_defaults()
@@ -63,6 +64,7 @@ class BootScene extends Scene
         {
             window.STORAGE.set('music_flag', '0');
         }
+        window.STORAGE.set('partite_counter', 0);
     }
 
     load_enemies()

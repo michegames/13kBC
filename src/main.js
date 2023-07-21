@@ -24,15 +24,21 @@ window.$GLOBALS =
 }
 
 window.STORAGE = new window.Basil(
-{
-    namespace: '13kbc',
-    storages: ['local', 'session', 'memory'],
-    storage: 'local'
-});
+    {
+        namespace: '13kbc',
+        storages: ['local', 'session', 'memory'],
+        storage: 'local'
+    });
 
 function start_cb()
 {
-    console.log('staring callback');
+    PokiSDK.init().then(() =>
+    {
+        window.$G = new Game(config);
+    }).catch(() =>
+    {
+        window.$G = new Game(config);
+    });
 }
 
 if (_is_mobile())
@@ -53,7 +59,6 @@ if (_is_mobile())
     else
     {
         // portarit
-        window.$G = new Game(config);
         start_cb()
         window.onresize = function ()
         {
@@ -77,6 +82,5 @@ if (_is_mobile())
 }
 else
 {
-    window.$G = new Game(config);
     start_cb();
 }

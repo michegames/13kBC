@@ -26,12 +26,32 @@ class GameScene extends Scene
 
     init(config)
     {
-        console.log('config is => ' + JSON.stringify(config));
         this.selected_pg = config.pg;
+
+        if(window.STORAGE.get('partite_counter') >= 3)
+        {
+            window.STORAGE.set('partite_counter', 0);
+            PokiSDK.commercialBreak(() =>
+            {
+                this.snd_music.stop();
+                this.scene.pause();
+            }).then(() =>
+            {
+                this.scene.resume('scn_game');
+            });
+        }
+        else
+        {
+            let current = window.STORAGE.get('partite_counter');
+            console.log('curr is => ' + current);
+            current += 1;
+            window.STORAGE.set('partite_counter', current);
+        }
     }
 
     create()
     {
+        PokiSDK.gameplayStart();
         this.state = STATE.PLAY;
         const { width, height } = this.sys.game.canvas;
         const center_x = width / 2;
@@ -367,6 +387,7 @@ class GameScene extends Scene
                     }
                     window.STORAGE.set('scores', JSON.stringify(score_table));
                     this.snd_music.stop();
+                    PokiSDK.gameplayStop();
                     this.scene.start('scn_menu');
                 }
             }

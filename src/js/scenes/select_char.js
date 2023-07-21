@@ -42,6 +42,7 @@ class SelectScene extends Scene
                     completeDelay: 500,
                     onComplete: () =>
                     {
+                        console.log("oncpm");
                         this.scene.start('scn_game', {pg:sprite});
                     }
                 }
@@ -72,10 +73,6 @@ class SelectScene extends Scene
         const p3 = this._create_selectable_pg(center_x -offset, center_y +offset, 'caveman');
         const p4 = this._create_selectable_pg(center_x +offset, center_y +offset, 'caveman2');
 
-        this._create_button_for_pg(p1, 'cavegirl', [p2,p3,p4, select]);
-        this._create_button_for_pg(p2, 'cavegirl2', [p1,p3,p4, select]);
-        this._create_button_for_pg(p3, 'caveman', [p1,p2,p4, select]);
-        this._create_button_for_pg(p4, 'caveman2', [p1,p2,p3, select]);
 
         if(this.unlocked === true)
         {
