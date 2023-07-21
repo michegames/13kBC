@@ -24,6 +24,12 @@ class GameScene extends Scene
         this.start_point_y = 36;
     }
 
+    init(config)
+    {
+        console.log('config is => ' + JSON.stringify(config));
+        this.selected_pg = config.pg;
+    }
+
     create()
     {
         this.state = STATE.PLAY;
@@ -137,7 +143,8 @@ class GameScene extends Scene
         const { width, height } = this.sys.game.canvas;
         const players = ['cavegirl', 'cavegirl2', 'caveman', 'caveman2'];
 
-        this.cur_player = players[Phaser.Math.Between(0, players.length - 1)];
+        //this.cur_player = players[Phaser.Math.Between(0, players.length - 1)];
+        this.cur_player = this.selected_pg;
         this.cur_animation_walk_up = `${this.cur_player}_walk_u`;
         this.cur_animation_walk_down = `${this.cur_player}_walk_d`;
 

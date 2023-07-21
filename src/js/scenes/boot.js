@@ -10,10 +10,18 @@ class BootScene extends Scene
     preload()
     {
         const { width, height } = this.sys.game.canvas;
-        this.loadLabel = this.add.text(width/2, height/2, 'loading\n0%', { font: '30px Arial', fill: '#fff', align: 'center' });
+        const center_x = width / 2;
+        const center_y = height / 2;
+        this.add.text(width/2, 60, 'Crazed\n Quadrupedes', { font: '30px monospace', fill: '#fff', align: 'center' }).setOrigin(0.5);
+        this.loadLabel = this.add.text(width/2, center_y - 70, 'loading\n0%', { font: '25px monospace', fill: '#fff', align: 'center' });
         this.loadLabel.setOrigin(0.5, 0.5);
 
-        this.load.atlas('13kbc', 'obj/cq5.png', 'obj/cq5.json');
+
+        this.add.rectangle(center_x, center_y, width-20, 60, 0x000000);
+
+        this.progressbar = this.add.rectangle(20, center_y, 0, 40, 0xffffff);
+
+        this.load.atlas('13kbc', 'obj/texture.png', 'obj/texture.json');
         this.load.bitmapFont('PublicPixel', 'obj/publicpixelg.png', 'obj/publicpixelg.xml');
         this.load.audio('hit', 'obj/hit.wav');
         this.load.audio('coin', 'obj/coin.wav');
@@ -24,9 +32,11 @@ class BootScene extends Scene
 
     progress(value)
     {
+        const { width, height } = this.sys.game.canvas;
         // Update loading progress
         let percentage = Math.round(value * 100) + '%';
         this.loadLabel.setText('loading\n' + percentage);
+        this.progressbar.width = (width-40) * value;
     }
 
     create()
@@ -83,7 +93,7 @@ class BootScene extends Scene
     loads_pg()
     {
         const { width, height } = this.sys.game.canvas;
-        const players = ['cavegirl', 'cavegirl2', 'caveman', 'caveman2'];
+        const players = ['cavegirl', 'cavegirl2', 'caveman', 'caveman2', 'boy'];
         for(let i=0; i<players.length; i++)
         {
             const _name = players[i];
@@ -95,13 +105,13 @@ class BootScene extends Scene
             this.anims.create({
                 key: _anim_d,
                 frameRate: 5,
-                frames: this.anims.generateFrameNumbers(_name, {frames:[0,2,4,6]}),
+                frames: this.anims.generateFrameNumbers(_name, {frames:[0,4,8,12]}),
                 repeat: -1
             });
             this.anims.create({
                 key: _anim_u,
                 frameRate: 5,
-                frames: this.anims.generateFrameNumbers(_name, {frames:[1, 3, 5, 7]}),
+                frames: this.anims.generateFrameNumbers(_name, {frames:[1, 5, 9, 13]}),
                 repeat: -1
             });
         }

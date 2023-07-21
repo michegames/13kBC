@@ -1,0 +1,859 @@
+{
+	"textures": [
+		{
+			"image": "texture",
+			"format": "RGBA8888",
+			"size": {
+				"w": 440,
+				"h": 174
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "logo_pig.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 160,
+						"h": 160
+					},
+					"spriteSourceSize": {
+						"x": 25,
+						"y": 18,
+						"w": 110,
+						"h": 124
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 110,
+						"h": 124
+					}
+				},
+				{
+					"filename": "logo_cow.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 160,
+						"h": 160
+					},
+					"spriteSourceSize": {
+						"x": 31,
+						"y": 17,
+						"w": 98,
+						"h": 126
+					},
+					"frame": {
+						"x": 110,
+						"y": 0,
+						"w": 98,
+						"h": 126
+					}
+				},
+				{
+					"filename": "bg.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 440,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 440,
+						"h": 16
+					},
+					"frame": {
+						"x": 0,
+						"y": 126,
+						"w": 440,
+						"h": 16
+					}
+				},
+				{
+					"filename": "bg2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 440,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 440,
+						"h": 16
+					},
+					"frame": {
+						"x": 0,
+						"y": 142,
+						"w": 440,
+						"h": 16
+					}
+				},
+				{
+					"filename": "bg3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 440,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 440,
+						"h": 16
+					},
+					"frame": {
+						"x": 0,
+						"y": 158,
+						"w": 440,
+						"h": 16
+					}
+				},
+				{
+					"filename": "cavegirl.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 63,
+						"h": 64
+					},
+					"frame": {
+						"x": 208,
+						"y": 0,
+						"w": 63,
+						"h": 64
+					}
+				},
+				{
+					"filename": "cavegirl2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 63,
+						"h": 64
+					},
+					"frame": {
+						"x": 271,
+						"y": 0,
+						"w": 63,
+						"h": 64
+					}
+				},
+				{
+					"filename": "boy.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 62,
+						"h": 63
+					},
+					"frame": {
+						"x": 334,
+						"y": 0,
+						"w": 62,
+						"h": 63
+					}
+				},
+				{
+					"filename": "caveman.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 2,
+						"w": 61,
+						"h": 62
+					},
+					"frame": {
+						"x": 334,
+						"y": 63,
+						"w": 61,
+						"h": 62
+					}
+				},
+				{
+					"filename": "caveman2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 2,
+						"w": 61,
+						"h": 62
+					},
+					"frame": {
+						"x": 208,
+						"y": 64,
+						"w": 61,
+						"h": 62
+					}
+				},
+				{
+					"filename": "btn.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 64,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 64,
+						"h": 20
+					},
+					"frame": {
+						"x": 269,
+						"y": 64,
+						"w": 64,
+						"h": 20
+					}
+				},
+				{
+					"filename": "cow.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 48,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 48,
+						"h": 16
+					},
+					"frame": {
+						"x": 269,
+						"y": 84,
+						"w": 48,
+						"h": 16
+					}
+				},
+				{
+					"filename": "horse.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 46,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 46,
+						"h": 16
+					},
+					"frame": {
+						"x": 269,
+						"y": 100,
+						"w": 46,
+						"h": 16
+					}
+				},
+				{
+					"filename": "pig1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 32,
+						"h": 14
+					},
+					"frame": {
+						"x": 395,
+						"y": 63,
+						"w": 32,
+						"h": 14
+					}
+				},
+				{
+					"filename": "pig2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 32,
+						"h": 14
+					},
+					"frame": {
+						"x": 395,
+						"y": 77,
+						"w": 32,
+						"h": 14
+					}
+				},
+				{
+					"filename": "pig3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 32,
+						"h": 14
+					},
+					"frame": {
+						"x": 395,
+						"y": 91,
+						"w": 32,
+						"h": 14
+					}
+				},
+				{
+					"filename": "base.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 16
+					},
+					"frame": {
+						"x": 315,
+						"y": 100,
+						"w": 16,
+						"h": 16
+					}
+				},
+				{
+					"filename": "Nut.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 15
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 15
+					},
+					"frame": {
+						"x": 317,
+						"y": 84,
+						"w": 15,
+						"h": 15
+					}
+				},
+				{
+					"filename": "Nut2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 15
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 15
+					},
+					"frame": {
+						"x": 395,
+						"y": 105,
+						"w": 15,
+						"h": 15
+					}
+				},
+				{
+					"filename": "Shrimp.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 15,
+						"h": 15
+					},
+					"frame": {
+						"x": 410,
+						"y": 105,
+						"w": 15,
+						"h": 15
+					}
+				},
+				{
+					"filename": "Yakitori.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 15,
+						"h": 15
+					},
+					"frame": {
+						"x": 425,
+						"y": 105,
+						"w": 15,
+						"h": 15
+					}
+				},
+				{
+					"filename": "Noodle.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 16,
+						"h": 14
+					},
+					"frame": {
+						"x": 396,
+						"y": 0,
+						"w": 16,
+						"h": 14
+					}
+				},
+				{
+					"filename": "Octopus.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 15,
+						"h": 14
+					},
+					"frame": {
+						"x": 412,
+						"y": 0,
+						"w": 15,
+						"h": 14
+					}
+				},
+				{
+					"filename": "Fish.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 14,
+						"h": 14
+					},
+					"frame": {
+						"x": 396,
+						"y": 14,
+						"w": 14,
+						"h": 14
+					}
+				},
+				{
+					"filename": "Beaf.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 2,
+						"w": 15,
+						"h": 13
+					},
+					"frame": {
+						"x": 410,
+						"y": 14,
+						"w": 15,
+						"h": 13
+					}
+				},
+				{
+					"filename": "SeedLarge.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 13
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 13
+					},
+					"frame": {
+						"x": 425,
+						"y": 14,
+						"w": 14,
+						"h": 13
+					}
+				},
+				{
+					"filename": "SeedLargeWhite.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 13
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 13
+					},
+					"frame": {
+						"x": 410,
+						"y": 27,
+						"w": 14,
+						"h": 13
+					}
+				},
+				{
+					"filename": "Calamari.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 13,
+						"h": 12
+					},
+					"frame": {
+						"x": 427,
+						"y": 0,
+						"w": 13,
+						"h": 12
+					}
+				},
+				{
+					"filename": "Honey.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 12,
+						"h": 13
+					},
+					"frame": {
+						"x": 396,
+						"y": 28,
+						"w": 12,
+						"h": 13
+					}
+				},
+				{
+					"filename": "TeaLeaf.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 1,
+						"w": 11,
+						"h": 14
+					},
+					"frame": {
+						"x": 424,
+						"y": 27,
+						"w": 11,
+						"h": 14
+					}
+				},
+				{
+					"filename": "FortuneCookie.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 12,
+						"h": 12
+					},
+					"frame": {
+						"x": 408,
+						"y": 40,
+						"w": 12,
+						"h": 12
+					}
+				},
+				{
+					"filename": "Sushi.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 3,
+						"w": 13,
+						"h": 11
+					},
+					"frame": {
+						"x": 420,
+						"y": 41,
+						"w": 13,
+						"h": 11
+					}
+				},
+				{
+					"filename": "Sushi2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 3,
+						"w": 13,
+						"h": 11
+					},
+					"frame": {
+						"x": 396,
+						"y": 52,
+						"w": 13,
+						"h": 11
+					}
+				},
+				{
+					"filename": "SeedBig1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 10,
+						"h": 13
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 10,
+						"h": 13
+					},
+					"frame": {
+						"x": 427,
+						"y": 52,
+						"w": 10,
+						"h": 13
+					}
+				},
+				{
+					"filename": "SeedBig2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 10,
+						"h": 13
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 10,
+						"h": 13
+					},
+					"frame": {
+						"x": 427,
+						"y": 65,
+						"w": 10,
+						"h": 13
+					}
+				},
+				{
+					"filename": "SeedBig3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 10,
+						"h": 13
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 10,
+						"h": 13
+					},
+					"frame": {
+						"x": 427,
+						"y": 78,
+						"w": 10,
+						"h": 13
+					}
+				},
+				{
+					"filename": "Onigiri.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 4,
+						"w": 13,
+						"h": 9
+					},
+					"frame": {
+						"x": 427,
+						"y": 91,
+						"w": 13,
+						"h": 9
+					}
+				},
+				{
+					"filename": "Seed1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 8,
+						"h": 8
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 8,
+						"h": 8
+					},
+					"frame": {
+						"x": 396,
+						"y": 41,
+						"w": 8,
+						"h": 8
+					}
+				},
+				{
+					"filename": "Seed2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 8,
+						"h": 8
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 8,
+						"h": 8
+					},
+					"frame": {
+						"x": 409,
+						"y": 52,
+						"w": 8,
+						"h": 8
+					}
+				},
+				{
+					"filename": "Seed3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 8,
+						"h": 8
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 8,
+						"h": 8
+					},
+					"frame": {
+						"x": 417,
+						"y": 52,
+						"w": 8,
+						"h": 8
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "http://free-tex-packer.com",
+		"version": "0.6.7"
+	}
+}

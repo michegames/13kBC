@@ -17,7 +17,7 @@ function _make_btn_menu(y, text, on_complete)
         y: y,
         text: text,
         on_complete: new_complete,
-        scale_x: 5,
+        scale_x: 4,
         scale_y: 3,
         text_size: 20,
         yoyo: true,

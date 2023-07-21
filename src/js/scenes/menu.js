@@ -14,7 +14,7 @@ class MenuScene extends Scene
     _make_logo()
     {
         const { width, height } = this.sys.game.canvas;
-        const logo = this.add.sprite(width / 2, height - 100, '13kbc', 'logo.png');
+        const logo = this.add.sprite(width / 2, height - 100, '13kbc', 'logo_cow.png');
         this.tweens.add(
             {
                 targets: logo,
@@ -44,12 +44,12 @@ class MenuScene extends Scene
                     }
                     else
                     {
-                        this.scene.start('scn_game');
+                        this.scene.start('scn_select');
                     }
                 }
             },
             {
-                title: 'Best Scores',
+                title: 'Top Scores',
                 y: 275,
                 on_complete: function()
                 {
