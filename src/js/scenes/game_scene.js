@@ -189,11 +189,13 @@ class GameScene extends Scene
 
     add_enemy()
     {
+        console.log("A");
         if(
             (this.enemies.getChildren().length >= 3) &&
             (this.score <= 30)
         )
         {
+            console.log("B");
             return -1;
         }
         else if(
@@ -201,8 +203,10 @@ class GameScene extends Scene
             (this.score <= 50)
         )
         {
+            console.log("C");
             return -1;
         }
+        console.log("DZ");
         const { width, height } = this.sys.game.canvas;
         const center_x = width / 2;
 
@@ -210,11 +214,11 @@ class GameScene extends Scene
         const enemy_texture = enemies[Phaser.Math.Between(0, enemies.length - 1)];
         const enemy_anim = `${enemy_texture}_walk`;
 
-        let _y_line = Phaser.Math.Between(0, 16);
+        let _y_line = (this.score >= 30) ? Phaser.Math.Between(0, 16) : Phaser.Math.Between(2, 14);
 
         while(!this.is_in_enemies_y(_y_line))
         {
-            _y_line = Phaser.Math.Between(0, 16);
+            _y_line = (this.score >= 30) ? Phaser.Math.Between(0, 16) : Phaser.Math.Between(2, 14);
         }
 
 

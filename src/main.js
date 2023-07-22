@@ -32,10 +32,19 @@ window.STORAGE = new window.Basil(
 
 function start_cb()
 {
+    window.$G = new Game(config);
     console.log('staring callback');
 }
 
-if (_is_mobile())
+if(window.hasOwnProperty("cordova"))
+{
+    document.addEventListener("deviceready", () =>
+    {
+        start_cb();
+    }, false);
+
+}
+else if (_is_mobile())
 {
     // check if start landascape
     if (window.innerWidth > window.innerHeight)
@@ -53,7 +62,6 @@ if (_is_mobile())
     else
     {
         // portarit
-        window.$G = new Game(config);
         start_cb()
         window.onresize = function ()
         {
@@ -77,6 +85,5 @@ if (_is_mobile())
 }
 else
 {
-    window.$G = new Game(config);
     start_cb();
 }
